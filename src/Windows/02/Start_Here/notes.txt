@@ -1,0 +1,23 @@
+most work done in Windows.MainWindow.xaml.cs
+
+Adding the async keyword isn't enough, it must have something it awaits
+Therefore, you must always use async and await together
+
+Not just for web operations, can be used for any slow I/O operations such as; Disk, Memory, Web/API, Database
+What about CPU bound methods?
+    Use Parallel programming instead
+
+An asynchronous operation does occur in parallel. The difference is when you await in async, you subscribe to the event when that operation completes
+    See "Building Multithread Applications" video course for more info
+
+What's a task?
+    A task is a representation of an async operation
+
+How do you get the info from the task?
+    You can get it from looking at task.Result. This is a bad idea to do first
+    Calling Result or Wait will block and potentially deadlock your application
+        This will just end up being synchronous with extra steps. Oops.
+    Instead, make a new var and await the task. Or just await the GetAsync method you're calling
+    The await keyword will pause execution of the method until a result is available, without blocking the calling (UI) thread
+
+Calling any Result or Wait() methods may block your thread
